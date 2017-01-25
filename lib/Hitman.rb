@@ -29,5 +29,10 @@ bot.command(:plouf, description: "Chooses for you between multiple choices. Usag
 	bot.send_message(event.channel, correct_args.sample, tts = true)
 end
 
+bot.command(:quebec, description: "Random Quebec French profany. Usage : .quebec") do |event|
+	array = ["ostie d'calisse" , "tabarnak", "j'm'en calisse"]
+	bot.send_message(event.channel, array.sample, tts = true)
+end
+
 bot.run
 end
