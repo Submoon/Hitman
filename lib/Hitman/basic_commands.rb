@@ -1,6 +1,8 @@
 module BasicCommands
   extend Discordrb::Commands::CommandContainer
 
+  puts 'Basic commands initialized'
+
   # Here we can see the `help_available` property used, which can determine whether a command shows up in the default
   # generated `help` command. It is true by default but it can be set to false to hide internal commands that only
   # specific people can use.
@@ -21,7 +23,7 @@ module BasicCommands
   end
 
   command :tts, description: 'Sends a message in tts' do |event, *args|
-    event.channel.send_message args.join(' '), tts = true
+      event.channel.send_message args.to_a.join(' '), tts = true
 
   end
 
