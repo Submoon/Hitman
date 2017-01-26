@@ -10,9 +10,9 @@ module BrainfuckCommands
       output = StringIO.new
       parser = Brainfuck.new(code, output)
       parser.run()
-      output.string
+      "```Markdown\n#{output.string}\n```"
     rescue Exception => e
-      event.channel.send_message e.message
+      event.channel.send_message "```Markdown\n#{e.message}\n```"
     end
   end
 
