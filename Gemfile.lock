@@ -55,6 +55,7 @@ GEM
       rspec-support (~> 3.5.0)
     rspec-support (3.5.0)
     thread_safe (0.3.5)
+    tsion-rbrainfuck (0.1.0)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     unf (0.1.4)
@@ -74,6 +75,7 @@ DEPENDENCIES
   discordrb
   rake (~> 10.0)
   rspec (~> 3.0)
+  tsion-rbrainfuck
 
 BUNDLED WITH
    1.14.3
