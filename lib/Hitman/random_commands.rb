@@ -1,6 +1,7 @@
 module RandomCommands
   extend Discordrb::Commands::CommandContainer
 
+  @@QUEBEC_ARRAY = ["ostie d'calisse" , 'tabarnak', "j'm'en calisse","ca goûte la marde", "t'es cave", "sacristi", "marde", "ostie d'crisse", "fils de poutine"]
   #Module for all the random commands
 
   puts 'Random commands initialized'
@@ -11,8 +12,8 @@ module RandomCommands
   end
 
   command(:quebec, description: 'Random Quebec French profany. Usage : .quebec') do |event|
-    array = ["ostie d'calisse" , 'tabarnak', "j'm'en calisse"]
-    array.sample
+    
+    @@QUEBEC_ARRAY.sample
   end
 
   command :dice, description: 'Rolls a dice (You can specify the maximum with the second parameter' do |event, max=6|
