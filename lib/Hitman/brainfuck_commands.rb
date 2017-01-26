@@ -8,9 +8,8 @@ module BrainfuckCommands
     begin
       code = args.last
       output = StringIO.new
-      parser = Brainfucktt::Parser.new(output: output)
-      parser.parse(code)
-      parser.run(code)
+      parser = Brainfucktt.parse(code)
+      Brainfucktt.run(code, output: output)
       output.string
     rescue RangeError => e
       "Impossible to parse due to\n\t #{e.message}"
