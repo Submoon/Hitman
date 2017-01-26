@@ -12,10 +12,13 @@ module BrainfuckCommands
       Brainfucktt.run(code, output: output)
       output.string
     rescue RangeError => e
-      "Impossible to parse due to\n\t #{e.message}"
+      event.channel.send_message "Impossible to parse due to\n\t #{e.message}"
     else
-      'Unknown Error'
+      event.channel.send_message 'Unknown Error'
+    ensure
+      event.channel.send_message "Pointer value: #{Brainfucktt::Parser.instance.pointer}"
     end
+
   end
 
 
