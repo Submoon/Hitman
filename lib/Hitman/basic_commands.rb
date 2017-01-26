@@ -22,6 +22,11 @@ module BasicCommands
     m.edit "Pong! Time taken: #{Time.now - event.timestamp} seconds."
   end
 
+  command :say, description: 'Sends a message' do |event, *args|
+       args.to_a.join(' ')
+
+  end
+
   command :tts, description: 'Sends a message in tts' do |event, *args|
       event.channel.send_message args.to_a.join(' '), tts = true
 
