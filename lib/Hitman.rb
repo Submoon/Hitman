@@ -2,6 +2,7 @@ require "Hitman/version"
 require 'discordrb'
 require 'Hitman/basic_commands'
 require 'Hitman/random_commands'
+require 'Hitman/brainfuck_commands'
 
 module Hitman
   puts 'Creating bot'
@@ -9,6 +10,7 @@ module Hitman
 
   bot.include! BasicCommands
   bot.include! RandomCommands
+  bot.include! BrainfuckCommands
 
   puts "Bot #{bot} ready to run"
 
