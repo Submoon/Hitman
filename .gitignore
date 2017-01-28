@@ -52,3 +52,4 @@ build-iPhoneSimulator/
 \.idea/
 
 Gemfile\.lock
+config.rb
