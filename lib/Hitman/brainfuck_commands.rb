@@ -4,7 +4,7 @@ require 'stringio'
 module BrainfuckCommands
   extend Discordrb::Commands::CommandContainer
 
-  command(:bf, description: 'Interprater for brainfuck') do |event, *args|
+  command(:bf, description: 'Interpreter for brainfuck', usage: '.bf "Brainfuck code"') do |event, *args|
     begin
       code = args.last
       output = StringIO.new

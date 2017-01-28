@@ -15,19 +15,19 @@ module BasicCommands
     exit
   end
 
-  command(:ping, description: 'Sends a ping to the bot') do |event|
+  command(:ping, description: 'Sends a ping to the bot', usage: '.ping') do |event|
     # The `respond` method returns a `Message` object, which is stored in a variable `m`. The `edit` method is then called
     # to edit the message with the time difference between when the event was received and after the message was sent.
     m = event.respond('Pong!')
     m.edit "Pong! Time taken: #{Time.now - event.timestamp} seconds."
   end
 
-  command :say, description: 'Sends a message' do |event, *args|
+  command :say, description: 'Sends a message', usage: '.say Whatever you want him to say' do |event, *args|
        args.to_a.join(' ')
 
   end
 
-  command :tts, description: 'Sends a message in tts' do |event, *args|
+  command :tts, description: 'Sends a message in tts', usage: '.tts Whatever you want him to say out loud' do |event, *args|
       event.channel.send_message args.to_a.join(' '), tts = true
 
   end

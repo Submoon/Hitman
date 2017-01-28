@@ -6,17 +6,17 @@ module RandomCommands
 
   puts 'Random commands initialized'
 
-  command(:plouf, description: 'Chooses for you between multiple choices. Usage : .plouf arg 1;arg 2') do |event, *args|
+  command(:plouf, description: 'Chooses for you between multiple choices.', usage: '.plouf arg 1;arg 2;arg3') do |event, *args|
     correct_args = args.join(' ').split(';')
     correct_args.sample
   end
 
-  command(:quebec, description: 'Random Quebec French profany. Usage : .quebec') do |event|
+  command(:quebec, description: 'Random Quebec French profany.', usage: '.quebec') do |event|
     
     @@QUEBEC_ARRAY.sample
   end
 
-  command :dice, description: 'Rolls a dice (You can specify the maximum with the second parameter' do |event, max=6|
+  command :dice, description: 'Rolls a dice', usage: '.roll max_number (default:6)' do |event, max=6|
     rand(1..max.to_i)
   end
 
