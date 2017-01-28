@@ -32,4 +32,13 @@ module BasicCommands
 
   end
 
+  command :listids, description: 'Inspects all users' do |event|
+    string = "```ini\n[users]\n"
+    event.server.members.each do |m|
+       string << "#{m.username}##{m.discriminator} = #{m.id}\n"
+    end
+    string <<"```"
+    string
+  end
+
 end
