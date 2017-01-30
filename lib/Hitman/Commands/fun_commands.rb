@@ -1,7 +1,7 @@
 module FunCommands
   extend Discordrb::Commands::CommandContainer
 
-  command :bitchslap, description: 'Bitchslaps someone to infinity and beyond (User needs to be in a voice chat', usage: '.bitchslap @guy (Discord will translate it into an id)' do |event, tag|
+  command :bitchslap, description: 'Bitchslaps someone to infinity and beyond (User needs to be in a voice chat', usage: '.bitchslap @guy' do |event, tag|
   	voice_channels = event.server.voice_channels
   	member = event.server.member_by_tag(tag)
   	begin_voice = member.voice_channel
