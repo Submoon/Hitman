@@ -12,6 +12,7 @@ GEM
       minitest (~> 5.1)
       tzinfo (~> 1.1)
     concurrent-ruby (1.0.4)
+    configatron (4.5.0)
     diff-lcs (1.3)
     discordrb (3.1.1)
       activesupport
@@ -72,6 +73,7 @@ PLATFORMS
 DEPENDENCIES
   Hitman!
   bundler (~> 1.14)
+  configatron
   discordrb
   rake (~> 10.0)
   rspec (~> 3.0)
