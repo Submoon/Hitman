@@ -10,7 +10,7 @@ module FunCommands
   	event.respond "To infinity and beyond!"
   	((begin_index+1)..(begin_index+voice_channels.length-1)).each do |i|
   		reali = i%voice_channels.length
-  		event.server.move(member, voice_channels[reali])
+  		event.server.move(member.id, voice_channels[reali])
   		sleep(3)
   	end
   end

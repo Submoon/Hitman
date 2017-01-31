@@ -1,3 +1,4 @@
+require 'Hitman/Events/tell_events'
 module BasicCommands
   extend Discordrb::Commands::CommandContainer
 
@@ -39,6 +40,18 @@ module BasicCommands
     end
     string <<"```"
     string
+  end
+
+  
+
+  command :tell, description: 'Tells something to someone the next time they speak', usage: '.tell @guy' do |event, guy, *args|
+    author = event.author
+    time = event.timestamp
+    member = event.server.member_by_tag(guy)
+    phrase = "#{time.strftime("%Y-%m-%d %H:%M:%S")} by <@#{author.id}>: #{args.join(' ')}"
+    
+    TellEvents::push(member.id, phrase)
+    event.channel.send_message "Message will be delivered to <@#{member.id}>"
   end
 
 end
