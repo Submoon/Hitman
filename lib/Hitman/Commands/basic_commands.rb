@@ -10,7 +10,7 @@ module BasicCommands
   command(:exit, help_available: false) do |event|
     # This is a check that only allows a user with a specific ID to execute this command. Otherwise, everyone would be
     # able to shut your bot down whenever they wanted.
-    break unless event.user.id == 212597730407743489 # Replace number with your ID
+    break unless event.user.id == configatron.owner_id # Replace number with your ID
 
     event.respond('Bot is shutting down')
     exit
