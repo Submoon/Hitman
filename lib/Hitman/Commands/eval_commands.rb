@@ -5,11 +5,8 @@ module EvalCommands
         code = code.join(' ').to_s
         begin
           event << eval(code)
-          LOGGER.info "#{event.author.username} used eval command with the following code: #{code}."
         rescue => e
           event << 'Eval resulted in an error.'
-          LOGGER.error "#{event.author.username} used eval command with the following code: #{code} and it resulted in an error."
-          LOGGER.log_exception e
           nil
         end
       end

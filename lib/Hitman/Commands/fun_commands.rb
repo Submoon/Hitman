@@ -7,12 +7,13 @@ module FunCommands
   	begin_voice = member.voice_channel
   	break unless begin_voice
   	begin_index = voice_channels.find_index(begin_voice)
-  	event.respond "To infinity and beyond!"
-  	((begin_index+1)..(begin_index+voice_channels.length-1)).each do |i|
-  		reali = i%voice_channels.length
-  		event.server.move(member.id, voice_channels[reali])
+  	event.channel.send_message "To infinity and beyond!"
+  	((begin_index+1)..(begin_index+voice_channels.length)).each do |i|
+  		real_i = i%voice_channels.length
+  		event.server.move(member, voice_channels[real_i])
   		sleep(3)
-  	end
+    end
+    nil
   end
 
 end
