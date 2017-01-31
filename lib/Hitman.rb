@@ -6,6 +6,7 @@ require_relative '../config.rb'
 require 'Hitman/Utilities/server_utils'
 
 require 'Hitman/Events/tell_events'
+require 'Hitman/Commands/eval_commands'
 require 'Hitman/Commands/basic_commands'
 require 'Hitman/Commands/random_commands'
 require 'Hitman/Commands/brainfuck_commands'
@@ -18,6 +19,7 @@ module Hitman
   bot.include! TellEvents
 
   bot.include! BasicCommands
+  bot.include! EvalCommands
   bot.include! RandomCommands
   bot.include! BrainfuckCommands
   bot.include! FunCommands
