@@ -33,7 +33,7 @@ module SaveCommands
   		open(QUOTE_FILE, 'r') do |f|
   			open(QUOTE_FILE_TMP, 'w') do |f2|
   				f.each_line do |line|
-  					if !line.start_with? "#{id}"
+  					if !line.start_with? "#{id} :"
   						f2.write(line)
   					else
   						deleted = line
