@@ -9,8 +9,8 @@ require 'Hitman/Events/tell_events'
 require 'Hitman/Commands/eval_commands'
 require 'Hitman/Commands/basic_commands'
 require 'Hitman/Commands/random_commands'
-require 'Hitman/Commands/brainfuck_commands'
 require 'Hitman/Commands/fun_commands'
+require 'Hitman/Commands/save_commands'
 
 module Hitman
   puts 'Creating bot'
@@ -21,8 +21,8 @@ module Hitman
   bot.include! BasicCommands
   bot.include! EvalCommands
   bot.include! RandomCommands
-  bot.include! BrainfuckCommands
   bot.include! FunCommands
+  bot.include! SaveCommands
 
   puts "Bot #{bot} ready to run"
 

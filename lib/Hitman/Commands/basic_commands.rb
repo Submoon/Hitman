@@ -1,4 +1,3 @@
-require 'Hitman/Events/tell_events'
 module BasicCommands
   extend Discordrb::Commands::CommandContainer
 
