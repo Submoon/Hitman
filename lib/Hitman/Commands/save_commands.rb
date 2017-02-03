@@ -6,27 +6,37 @@ module SaveCommands
   QUOTE_FILE = File.join(File.dirname(__FILE__), '../../../quotes.txt') # add proper number of ..
   QUOTE_FILE_TMP = File.join(File.dirname(__FILE__), '../../../quotes.txt.tmp') # add proper number of ..
   #Quotes
-  command :quote, description: 'See, add, or delete a quote', usage: '.quote (for random quote)|.quote add quote_to_add|del <id>|<id>' do |event, arg='rand', *params|
-  	if arg=='rand'
+  command(:quote,
+  	description: 'See, add, or delete quotes', 
+  	usage: 'Random quote: .quote | Add a quote: .quote add quote_to_add | Delete a quote with its id: .quote del <id> | Find a quote with its id: .quote <id> | Find a quote with keywords: .quote find <keyword1 keyword2 ...> | Find all quotes corresponding to keywords: .quote findall <keyword 1 keywords 2 ...> | Export quotes: .quote export'
+  	) do |event, arg='rand', *params|
+  	case arg
+  	when 'rand' #Default case
   		quotes = IO.readlines(QUOTE_FILE)
+  		break unless quotes
+  		line = quotes.sample
+  		event << (line ? line : 'No quotes registered')
+  	when /\A[-+]?[0-9]+\z/ #Is integer so we want to see a particular quote
+  		quotes = IO.readlines(QUOTE_FILE) #Getting an array of al the lines
+  		id = arg.to_i
 		break unless quotes
-		line = quotes.sample
-		event << (line ? line : 'No quotes registered')
-	elsif arg.to_i.to_s == arg # We check if it's an int
-		quotes = IO.readlines(QUOTE_FILE)
-		break unless quotes
-		line = quotes[arg.to_i]
+		line = quotes.find{|l| (l.split(':'))[0].to_i==id} #Getting the quote corresponding to that number
 		event << (line ? line : 'This quote does not exist')
-	elsif arg=='add'
-		quote = params.join(' ')
+
+  	when 'add'
+  		quote = params.join(' ')
 		towrite=""
-		File.open(QUOTE_FILE, 'a+') { |f| 
-			count = f.read.count("\n")
-			towrite = "#{count} : #{quote}\n"
+		quotes = IO.readlines(QUOTE_FILE)
+		last = -1
+		if quotes && !quotes.empty?
+			last = (quotes.last.split(':'))[0].to_i #Getting last used number
+		end
+		File.open(QUOTE_FILE, 'a+') do |f| 
+			towrite = "#{last+1} : #{quote}\n"
 			f.write(towrite) 
-		}
+		end
 		event << "New quote saved\n #{towrite}"
-  	elsif arg=='del' #Removing a quote : .quote 
+  	when 'del'
   		id = params.first
   		deleted = nil
   		break unless id.to_i.to_s == id
@@ -38,15 +48,40 @@ module SaveCommands
   					else
   						deleted = line
   					end
-  				end
-  			end
+  					# To use if we want to use indexes
+  					#File.open('output.txt', 'w') do |out_file|
+	  					#File.foreach('input.txt').with_index do |line,line_number|
+	     				#	out_file.puts line if line_number.even?  # <== line numbers start at 0
+			 			#end
+					#end
+				end
+			end
+		end
+		FileUtils.mv QUOTE_FILE_TMP, QUOTE_FILE
+		event << (deleted ? "Quote deleted #{deleted}" : "No quote found with id #{id}")
+  	when 'find'
+  		quotes = IO.readlines(QUOTE_FILE)
+  		break unless quotes
+  		params.each do |p|
+  			quotes = quotes.select{|l| l.downcase.include? p.downcase}
   		end
-  		FileUtils.mv QUOTE_FILE_TMP, QUOTE_FILE
-  		event << (deleted ? "Quote deleted #{deleted}" : "No quote found with id #{id}")
+  		line = quotes.sample
+  		event << (line ? line : "No quotes found with keywords #{params}")
+  	when 'findall'
+  		quotes = IO.readlines(QUOTE_FILE)
+  		break unless quotes
+  		params.each do |p|
+  			quotes = quotes.select{|l| l.downcase.include? p.downcase}
+  		end
+  		quotes = quotes.join('')
+  		event << "Quotes found:\n #{quotes}"
+  	when 'export'
+  		f = File.new(QUOTE_FILE, "r")
+  		event.channel.send_file f, caption: 'All quotes in a txt format'
   	else
   		event << 'Wrong use of command, see .help quote'
   	end
-  	nil
+	nil
   end
 
 end
