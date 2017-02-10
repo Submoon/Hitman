@@ -36,6 +36,12 @@ Fill in all the details :
 - Your Discord App token
 - Your user ID (for eval commands for example)
 
+```INI
+configatron.client_id = your_client_id
+configatron.token = 'YOUR_TOKEN'
+configatron.owner_id = here_your_owner_id
+```
+
 You can then run `bin/console` to launch the bot.
 
 
