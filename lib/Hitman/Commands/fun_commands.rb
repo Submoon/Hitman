@@ -16,4 +16,9 @@ module FunCommands
     nil
   end
 
+
+  command :bomb, min_args: 1, description: 'Bombs someone', usage: '.bomb @guy' do |event, guy|
+    event << "No worko, I'm on the case!"
+  end
+
 end

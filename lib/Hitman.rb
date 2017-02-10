@@ -5,6 +5,7 @@ require_relative '../config.rb'
 
 require 'Hitman/Utilities/server_utils'
 
+require 'Hitman/Events/basic_events'
 require 'Hitman/Events/tell_events'
 require 'Hitman/Commands/eval_commands'
 require 'Hitman/Commands/basic_commands'
@@ -16,6 +17,7 @@ module Hitman
   puts 'Creating bot'
   bot = Discordrb::Commands::CommandBot.new token: configatron.token, client_id: configatron.client_id, prefix: '.'#, advanced_functionality: true
 
+  bot.include! BasicEvents
   bot.include! TellEvents
 
   bot.include! BasicCommands
