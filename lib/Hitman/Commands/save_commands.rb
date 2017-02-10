@@ -3,12 +3,27 @@ require 'fileutils'
 module SaveCommands
 	extend Discordrb::Commands::CommandContainer
 
+
+  #### => Quotes
+  #       Quotes are saved in a file named quotes.txt at project's root
+  #       They are linked to an ID which allows to manipulate them
+  #
+  ####
+
   QUOTE_FILE = File.join(File.dirname(__FILE__), '../../../quotes.txt') # add proper number of ..
   QUOTE_FILE_TMP = File.join(File.dirname(__FILE__), '../../../quotes.txt.tmp') # add proper number of ..
-  #Quotes
+  
   command(:quote,
   	description: 'See, add, or delete quotes', 
-  	usage: 'Random quote: .quote | Add a quote: .quote add quote_to_add | Delete a quote with its id: .quote del <id> | Find a quote with its id: .quote <id> | Find a quote with keywords: .quote find <keyword1 keyword2 ...> | Find all quotes corresponding to keywords: .quote findall <keyword 1 keywords 2 ...> | Export quotes: .quote export'
+  	usage: '
+    Random quote: .quote
+      Add a quote: .quote add quote_to_add
+      Delete a quote with its id: .quote del <id>
+      Find a quote with its id: .quote <id>
+      Find a quote with its id and say it out loud: .quote tts <id>
+      Find a quote with keywords: .quote find <keyword1 keyword2 ...>
+      Find all quotes corresponding to keywords: .quote findall <keyword 1 keywords 2 ...>
+      Export quotes: .quote export'
   	) do |event, arg='rand', *params|
   	case arg
   	when 'rand' #Default case
@@ -48,12 +63,6 @@ module SaveCommands
   					else
   						deleted = line
   					end
-  					# To use if we want to use indexes
-  					#File.open('output.txt', 'w') do |out_file|
-	  					#File.foreach('input.txt').with_index do |line,line_number|
-	     				#	out_file.puts line if line_number.even?  # <== line numbers start at 0
-			 			#end
-					#end
 				end
 			end
 		end
@@ -78,6 +87,13 @@ module SaveCommands
   	when 'export'
   		f = File.new(QUOTE_FILE, "r")
   		event.channel.send_file f, caption: 'All quotes in a txt format'
+    when 'tts'
+      quotes = IO.readlines(QUOTE_FILE) #Getting an array of al the lines
+      id = params.first.to_i
+      break unless quotes
+      line = quotes.find{|l| l.start_with? "#{id} :"} #Getting the quote corresponding to that number
+      break unless line
+      event.channel.send_message line, tts = true
   	else
   		event << 'Wrong use of command, see .help quote'
   	end
