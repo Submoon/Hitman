@@ -4,6 +4,7 @@ Hitman is a Discord bot developed in Ruby with [Discordrb](https://github.com/me
 It is a project made on my personal time to learn a little bit more about Ruby. If you have some advices about Ruby, I'll be happy to hear it, so please feel free to send me a message about that! 
 
 It is far from finished but I'm working on it.
+(At this moment, the bot is still on test, and not on its own server, so it is only online when I'm launching it)
 
 Hitman can:
 - Say things you ask him to say (wow...)
@@ -27,7 +28,7 @@ I advise you to create a role for him with all permissions. I'll create the link
 
 ## Development
 
-After checking out the repo, run `bin/setup` to install dependencies.
+After checking out the repo, run `bin/setup` to install dependencies. (Bundler must be installed: `$ gem install bundler`)
 
 Make a copy of the file 'example.config.rb' and name it 'config.rb'.
 Fill in all the details : 
