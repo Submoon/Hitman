@@ -1,7 +1,7 @@
 # Hitman
 
 Hitman is a Discord bot developed in Ruby with [Discordrb](https://github.com/meew0/discordrb).
-It is a project made on my personal time to learn a little bit more Ruby. If you have some advices to tell me about Ruby, I'll be happy to hear it, so please feel free to send me a message about that! 
+It is a project made on my personal time to learn a little bit more about Ruby. If you have some advices about Ruby, I'll be happy to hear it, so please feel free to send me a message about that! 
 
 It is far from finished but I'm working on it.
 
@@ -19,7 +19,7 @@ Hitman can:
 ## Installation
 Just invite this bot to your channel : https://discordapp.com/api/oauth2/authorize?client_id=273558943580553217&scope=bot
 
-I advise you to create a role for him with all permissions. I'll create the link for authorization another time.
+I advise you to create a role for him with all permissions. I'll create the link with authorizations another time.
 ## Usage
 
 `.help` to see a list of its available commands
