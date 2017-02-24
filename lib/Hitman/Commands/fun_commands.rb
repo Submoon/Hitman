@@ -1,3 +1,4 @@
+require 'Hitman/Model/bomb'
 module FunCommands
   extend Discordrb::Commands::CommandContainer
 
@@ -16,9 +17,47 @@ module FunCommands
     nil
   end
 
+  bomb = nil
 
-  command :bomb, min_args: 1, description: 'Bombs someone', usage: '.bomb @guy' do |event, guy|
-    event << "No worko, I'm on the case!"
+  #Bomb commands
+
+
+  def self.explosion(bomb)
+    bomb.event.channel.send_message "IT EXPLODED, YOU DIED"
+
+  end
+
+  command :bomb, min_args: 1, description: 'Bombs someone', usage: '.bomb @guy' do |event, tag|
+    guy = event.server.member_by_tag(tag)
+    if bomb
+      event << "There's already a bomb!"
+      return
+    end
+    bomb = Bomb.new(event, guy, 30)
+    task = Concurrent::ScheduledTask.execute(30){
+      FunCommands::explosion(bomb)
+    }
+    bomb.task=task
+    event << "#{guy.username} has been bombed! You have 30s to cut a wire: .cut red/blue/yellow"
+  end
+
+  command :cut, min_args: 1, description: 'Cuts a wire for the bomb', usage: '.cut red/blue/yellow' do |event, color|
+    break unless bomb
+    break unless event.author == bomb.guy
+
+    value = bomb.cut(color)
+    case value
+    when 0 #You live
+      event << "Bomb has been deactivated"
+      bomb.task.cancel
+      bomb = nil
+    when 1 #You ded
+      FunCommands::explosion(bomb)
+      bomb.task.cancel
+      bomb = nil
+    when 2 #Does nothing?
+      event << "It seems to do nothing?"
+    end
   end
 
 end

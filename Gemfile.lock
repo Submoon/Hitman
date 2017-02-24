@@ -73,6 +73,7 @@ PLATFORMS
 DEPENDENCIES
   Hitman!
   bundler (~> 1.14)
+  concurrent-ruby
   configatron
   discordrb
   rake (~> 10.0)

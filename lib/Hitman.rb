@@ -1,6 +1,7 @@
 require "Hitman/version"
 require 'discordrb'
 require 'configatron'
+require 'concurrent'
 require_relative '../config.rb'
 
 require 'Hitman/Utilities/server_utils'
