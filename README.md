@@ -47,7 +47,7 @@ You can then run `bin/console` to launch the bot.
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at [Submoon's Github](https://github.com/Fabien Bal-Fontaine/Hitman).
+Bug reports and pull requests are welcome on GitHub at [Submoon's Github](https://github.com/Submoon/Hitman).
 
 
 ## License
